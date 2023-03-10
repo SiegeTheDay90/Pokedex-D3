@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","mappings":"AAAA,SACI,qB","sources":["webpack://js-project/./src/index.scss"],"sourcesContent":["#example {\r\n    border: 1px solid red;\r\n}"],"names":[],"sourceRoot":""}
