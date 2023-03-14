@@ -19,7 +19,7 @@ async function getAndRender(num){
     graphPokemon(pokemon)
     document.getElementById("title").innerText = pokemon.name
     document.getElementById("portrait").src = pokemon.image
-    document.getElementById("portrait").style.width = "25%"
+    document.getElementById("portrait").style.width = "35%"
 }
 
 async function fetchValue() {

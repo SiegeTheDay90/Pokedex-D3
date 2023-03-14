@@ -9,22 +9,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="./dist/main.css" />
+    <script src="https://kit.fontawesome.com/a65848e44c.js" crossorigin="anonymous"></script>
     <script src="./dist/main.js"></script>
-    <title>Project Name</title>
+    <title>Pokédex D3</title>
   </head>
+  <header>
+    <nav id="header-nav">
+      <img id="Logo" alt="Pokédex D3 Logo" src="./src/assets/logo.png"></img>
+      <h1 id="title"></h1>
+      <div id="contact-list">
+        <a href="https://github.com/SiegeTheDay90/Interceptor"><i class="fa-brands fa-github contact-link"></i></a>&nbsp; 
+        <a href="https://www.linkedin.com/in/clarence-smith-31b21b59/"><i class="fa-brands fa-linkedin contact-link"></i></a><br/>
+        <p>by Clarence Smith</p>
+      </div>
+    </nav>
+  </header>
 
   <body>
     <section id="main-header">
-      <h1 id="title"></h1>
       <form id="numberForm">
         <input id="number" type="number" min="1" max="1010" maxlength="3" value="321"/>
         <input type="submit"/>
       </form>
     </section>
     <section id="main-content">
-      <svg id="example" width="600" height="500"></svg>
+      <svg id="example" width="600" height="300"></svg>
       <img id="portrait"/>
     </section>
   </body>
-  <div></div>
+  <footer id="footer-content">
+    <p>Data visualization made with <a href="https://d3js.org/">D3.js</a></p>
+    <p>Data originates from <a href="https://pokeapi.co/">PokéAPI</a></p>
+  </footer>
 </html>

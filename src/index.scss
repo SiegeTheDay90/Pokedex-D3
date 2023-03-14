@@ -1,26 +1,26 @@
-#example, #portrait, #title {
-    border: 1px solid red;
-}
+@use './styles/header.scss';
 
+body {
+    margin: 0;
+    padding: 0;
+    border: 8px solid #344e8f;
+}
 #main-content {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 }
 
+#footer-content, #main-content {
+    padding-left: 2%;
+}
+
 #main-header {
     text-align: center;
-    h1 {
-        font-size: 5em;
-        margin: 0;
-    }
 }
 
 #number {
     width: 50px;
-}
-
-svg {
 }
 
 @media (max-width: 700px) {
