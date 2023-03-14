@@ -2,14 +2,14 @@ import {getPokemon, graphPokemon} from './scripts/util';
 
 
 window.addEventListener("DOMContentLoaded", async () =>{
-    await getAndRender(25);
-    const form = document.getElementbyId("numberForm")
+    await getAndRender(321);
+    const form = document.getElementById("numberForm")
+    const num = document.getElementById("number")
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const num = document.getElementById("number").value
-        getAndRender(num)
+        console.log(num.value)
+        getAndRender(num.value)
     })
-    // document.getElementById("portrait").style.border = "1px solid red"
 })
 
 async function getAndRender(num){
@@ -19,7 +19,7 @@ async function getAndRender(num){
     graphPokemon(pokemon)
     document.getElementById("title").innerText = pokemon.name
     document.getElementById("portrait").src = pokemon.image
-    document.getElementById("portrait").style.width = 200
+    document.getElementById("portrait").style.width = "25%"
 }
 
 async function fetchValue() {

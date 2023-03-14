@@ -10,3 +10,11 @@
   align-items: center;
   justify-content: space-evenly;
 }
+
+#main-header {
+  text-align: center;
+}
+
+#number {
+  width: 50px;
+}
