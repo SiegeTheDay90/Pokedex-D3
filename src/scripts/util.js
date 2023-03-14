@@ -19,7 +19,7 @@ export function processPokemon(pokemon){
     processedPokemon["stats"] = stats
     processedPokemon["name"] = pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
     processedPokemon["types"] = pokemon.types.map((type) => type.type.name)
-    processedPokemon["image"] = pokemon.sprites.front_default
+    processedPokemon["image"] = pokemon.sprites.front_default || "./src/assets/default.png"
 
     return processedPokemon
 }
@@ -33,22 +33,22 @@ export function graphPokemon(processedPokemon){
     stats[4][0] = "Sp. Def";
     stats[5][0] = "Spd";
     const svg = d3.select("svg");
-    const xScale = d3.scaleBand().range([0, 400]).padding(0.4);
+    const xScale = d3.scaleBand().range([0, 300]).padding(0.2);
     const yScale = d3.scaleLinear().range([0, 260]);
     const g = svg.append("g")
-    const title = svg.append("g").attr("transform", "translate("+100+", 0)").text(processedPokemon.name)
+    const title = svg.append("g").attr("transform", "translate(40, 0)").text(processedPokemon.name)
     xScale.domain(["HP", "Atk", "Sp. Atk", "Def", "Sp. Def", "Spd"])
-    yScale.domain([255, 0])
-    g.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate("+100+","+360+")")
-    g.append("g").call(d3.axisLeft(yScale)).attr("transform", "translate("+100+","+100+")")
+    yScale.domain([260, 0])
+    g.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate(40,"+360+")")
+    g.append("g").call(d3.axisLeft(yScale)).attr("transform", "translate(40,"+100+")")
     g.selectAll(".bar")
         .data(stats)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function(d) { return xScale(d[0]) + 100; })
-        .attr("y", function(d) { return yScale(d[1]); })
+        .attr("x", function(d) { return xScale(d[0]) + 40; })
+        .attr("y", function(d) { return yScale(d[1]) + 100; })
         .attr("width", xScale.bandwidth())
-        .attr("height", function(d) { return 360 - yScale(d[1]); });
+        .attr("height", function(d) { return 260 - yScale(d[1]); });
 }
 
 export const d3example = (pokemon) => {

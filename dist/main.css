@@ -14,7 +14,21 @@
 #main-header {
   text-align: center;
 }
+#main-header h1 {
+  font-size: 5em;
+  margin: 0;
+}
 
 #number {
   width: 50px;
+}
+
+@media (max-width: 700px) {
+  #main-content {
+    flex-wrap: wrap-reverse;
+  }
+  svg {
+    position: relative;
+    width: 100vw;
+  }
 }
