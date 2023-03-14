@@ -1,3 +1,9 @@
-#example {
+#example, #portrait, #title {
     border: 1px solid red;
+}
+
+#main-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }

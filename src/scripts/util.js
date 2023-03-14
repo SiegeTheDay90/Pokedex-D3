@@ -3,22 +3,8 @@ import Pokedex from 'pokedex-promise-v2';
 
 const _ = new Pokedex();
 
-export async function getStats(id){
-    const pokemon = await _.getPokemonByName(id);
-
-    const stats = {}
-
-    pokemon.stats.forEach((stat) => {
-        stats[stat.stat.name] = stat.base_stat
-    })
-    console.log(`Got stats for ${pokemon.name}`)
-
-    return stats
-}
-
 export async function getPokemon(id){
     const pokemon = await _.getPokemonByName(id)
-
     return processPokemon(pokemon)
 }
 
@@ -31,7 +17,7 @@ export function processPokemon(pokemon){
     })
 
     processedPokemon["stats"] = stats
-    processedPokemon["name"] = pokemon.name
+    processedPokemon["name"] = pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
     processedPokemon["types"] = pokemon.types.map((type) => type.type.name)
     processedPokemon["image"] = pokemon.sprites.front_default
 
@@ -39,14 +25,30 @@ export function processPokemon(pokemon){
 }
 
 export function graphPokemon(processedPokemon){
+    const stats = Object.entries(processedPokemon.stats);
+    stats[0][0] = "HP";
+    stats[1][0] = "Atk";
+    stats[2][0] = "Sp. Atk";
+    stats[3][0] = "Def";
+    stats[4][0] = "Sp. Def";
+    stats[5][0] = "Spd";
     const svg = d3.select("svg");
-    const xScale = d3.scaleBand().range([0, 100]).padding(0.4);
-    const yScale = d3.scaleLinear().range([0, 100]);
+    const xScale = d3.scaleBand().range([0, 400]).padding(0.4);
+    const yScale = d3.scaleLinear().range([0, 260]);
     const g = svg.append("g")
-    xScale.domain([0, 100])
-    yScale.domain([0, 100])
-    g.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate("+100+","+100+")")
-    g.append("g").call(d3.axisLeft(yScale))
+    const title = svg.append("g").attr("transform", "translate("+100+", 0)").text(processedPokemon.name)
+    xScale.domain(["HP", "Atk", "Sp. Atk", "Def", "Sp. Def", "Spd"])
+    yScale.domain([255, 0])
+    g.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate("+100+","+360+")")
+    g.append("g").call(d3.axisLeft(yScale)).attr("transform", "translate("+100+","+100+")")
+    g.selectAll(".bar")
+        .data(stats)
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", function(d) { return xScale(d[0]) + 100; })
+        .attr("y", function(d) { return yScale(d[1]); })
+        .attr("width", xScale.bandwidth())
+        .attr("height", function(d) { return 360 - yScale(d[1]); });
 }
 
 export const d3example = (pokemon) => {
@@ -88,3 +90,5 @@ export const d3example = (pokemon) => {
 
     // debugger
 }
+
+

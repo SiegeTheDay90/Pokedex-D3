@@ -1,5 +1,9 @@
 <html lang="en">
-
+  <style>
+    .bar {
+      fill: steelblue;
+    }
+  </style>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,7 +14,17 @@
   </head>
 
   <body>
-    <svg id="example" width="600" height="500"></svg>
+    <section id="header-content">
+      <h1 id="title"></h1>
+      <form id="numberForm">
+        <input id="number" type="number" cols="3"/>
+        <input type="submit"/>
+      </form>
+    </section>
+    <section id="main-content">
+      <svg id="example" width="600" height="500"></svg>
+      <img id="portrait"/>
+    </section>
   </body>
   <div></div>
 </html>
