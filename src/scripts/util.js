@@ -3,6 +3,26 @@ import Pokedex from 'pokedex-promise-v2';
 
 const _ = new Pokedex();
 
+const colors = {}
+colors["normal"] = "#A8A77A";
+colors["fire"] = "#EE8130";
+colors["water"] = "#6390F0";
+colors["electric"] = "#F7D02C";
+colors["grass"] = "#7AC74C";
+colors["ice"] = "#96D9D6";
+colors["fighting"] = "#C22E28";
+colors["poison"] = "#A33EA1";
+colors["ground"] = "#E2BF65";
+colors["flying"] = "#A98FF3";
+colors["psychic"] = "#F95587";
+colors["bug"] = "#A6B91A";
+colors["rock"] = "#B6A136";
+colors["ghost"] = "#735797";
+colors["dragon"] = "#6F35FC";
+colors["dark"] = "#705746";
+colors["steel"] = "#B7B7CE";
+colors["fairy"] = "#D685AD";
+
 export async function getPokemon(id){
     const pokemon = await _.getPokemonByName(id)
     return processPokemon(pokemon)
@@ -33,8 +53,9 @@ export function graphPokemon(processedPokemon){
     stats[4][0] = "Sp. Def";
     stats[5][0] = "Spd";
     const svg = d3.select("svg");
+    svg.selectChildren().remove()
     const width = svg.attr("width");
-    debugger
+    // debugger
     const xScale = d3.scaleBand().range([0, 300]).padding(0.2);
     const yScale = d3.scaleLinear().range([0, 260]);
     const g = svg.append("g")
@@ -50,7 +71,10 @@ export function graphPokemon(processedPokemon){
         .attr("x", function(d) { return xScale(d[0]) + 40; })
         .attr("y", function(d) { return yScale(d[1]) + 5; })
         .attr("width", xScale.bandwidth())
-        .attr("height", function(d) { return 260 - yScale(d[1]); });
+        .attr("height", function(d) { return 260 - yScale(d[1]); })
+    
+    document.querySelectorAll(".bar").forEach((bar) => bar.style.fill = colors[processedPokemon.types[0]])    
+    // debugger
 }
 
 export const d3example = (pokemon) => {

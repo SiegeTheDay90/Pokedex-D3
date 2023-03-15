@@ -2,6 +2,7 @@ import {getPokemon, graphPokemon} from './scripts/util';
 
 
 window.addEventListener("DOMContentLoaded", async () =>{
+    localStorage.setItem("PD3_firstLoad", "true")
     await getAndRender(321);
     const form = document.getElementById("numberForm")
     const num = document.getElementById("number")
