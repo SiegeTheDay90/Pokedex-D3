@@ -56,10 +56,6 @@
   }
 }
 
-.bar {
-  fill: gray;
-}
-
 body {
   margin: 0;
   padding: 0;
@@ -70,6 +66,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+}
+#main-content svg {
+  width: 40vw;
+  height: 40vw;
 }
 
 #footer-content, #main-content {
@@ -88,8 +88,9 @@ body {
   #main-content {
     flex-wrap: wrap-reverse;
   }
-  svg {
+  #main-content svg {
     position: relative;
-    width: 100vw;
+    width: 85vw;
+    height: 340px;
   }
 }

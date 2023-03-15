@@ -1,4 +1,4 @@
-import {getPokemon, graphPokemon} from './scripts/util';
+import {graphPokemon, getAndRender, restoreGraph} from './scripts/util';
 
 
 window.addEventListener("DOMContentLoaded", async () =>{
@@ -11,23 +11,11 @@ window.addEventListener("DOMContentLoaded", async () =>{
         console.log(num.value)
         getAndRender(num.value)
     })
+    window.addEventListener('resize', (e) => {
+        restoreGraph();
+    })
 })
 
-async function getAndRender(num){
-    num = parseInt(num)
-    const pokemon = await getPokemon(num)
-    console.log(pokemon)
-    graphPokemon(pokemon)
-    document.getElementById("title").innerText = pokemon.name
-    document.getElementById("portrait").src = pokemon.image
-    document.getElementById("portrait").style.width = "35%"
-}
 
-async function fetchValue() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon/25", {})
-    const data = await response.json()
-
-    return data.name
-}
 
 

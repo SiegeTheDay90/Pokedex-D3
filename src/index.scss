@@ -1,7 +1,4 @@
 @use './styles/header.scss';
-.bar {
-    fill: gray;
-}
 
 body {
     margin: 0;
@@ -12,6 +9,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    svg {
+        width: 40vw;
+        height: 40vw;
+    };
 }
 
 #footer-content, #main-content {
@@ -29,11 +30,12 @@ body {
 @media (max-width: 700px) {
     #main-content {
         flex-wrap: wrap-reverse;
-    }
-    svg {
-        // transform: scale(0.8, 0.8);
-        position: relative;
-        // top: calc(-0.08*calc(100vh));
-        width: 100vw;
+        svg {
+            // transform: scale(0.8, 0.8);
+            position: relative;
+            // top: calc(-0.08*calc(100vh));
+            width: 85vw;
+            height: 340px;
+        }
     }
 }

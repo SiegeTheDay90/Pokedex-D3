@@ -31,16 +31,17 @@ export async function getPokemon(id){
 export function processPokemon(pokemon){
     const processedPokemon = {}
     const stats = {}
-
+    
     pokemon.stats.forEach((stat) => {
         stats[stat.stat.name] = stat.base_stat
     })
-
+    
     processedPokemon["stats"] = stats
     processedPokemon["name"] = pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
     processedPokemon["types"] = pokemon.types.map((type) => type.type.name)
     processedPokemon["image"] = pokemon.sprites.front_default || "./src/assets/default.png"
-
+    
+    localStorage.setItem("currentPokemon", JSON.stringify(processedPokemon))
     return processedPokemon
 }
 
@@ -53,68 +54,48 @@ export function graphPokemon(processedPokemon){
     stats[4][0] = "Sp. Def";
     stats[5][0] = "Spd";
     const svg = d3.select("svg");
-    svg.selectChildren().remove()
-    const width = svg.attr("width");
+    svg.selectChildren().remove();
+    const width = svg.property("width").baseVal.value;
+    const height = svg.property("height").baseVal.value;
+    const xOffset = width/6;
+    const yOffset = 8*height/10;
+    const yHeight = 0.7*height
+    const xScale = d3.scaleBand().range([0, 0.8*width]).padding(0.2);
+    const yScale = d3.scaleLinear().range([0, yHeight]);
+    const g = svg.append("g");
+    // const title = svg.append("text").attr("transform", "translate(40, 0)").text(processedPokemon.name);
+    xScale.domain(["HP", "Atk", "Sp. Atk", "Def", "Sp. Def", "Spd"]);
+    yScale.domain([260, 0]);
+    g.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate("+xOffset+","+yOffset+")");
+    g.append("g").call(d3.axisLeft(yScale)).attr("transform", "translate("+xOffset+","+(yOffset-yHeight)+")");
+    g.append("text").attr("transform", "translate("+width/3+","+height/25+")");
     // debugger
-    const xScale = d3.scaleBand().range([0, 300]).padding(0.2);
-    const yScale = d3.scaleLinear().range([0, 260]);
-    const g = svg.append("g")
-    const title = svg.append("g").attr("transform", "translate(40, 0)").text(processedPokemon.name)
-    xScale.domain(["HP", "Atk", "Sp. Atk", "Def", "Sp. Def", "Spd"])
-    yScale.domain([260, 0])
-    g.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate(40, 265)")
-    g.append("g").call(d3.axisLeft(yScale)).attr("transform", "translate(40, 5)")
     g.selectAll(".bar")
         .data(stats)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function(d) { return xScale(d[0]) + 40; })
-        .attr("y", function(d) { return yScale(d[1]) + 5; })
+        .attr("x", (d) => xScale(d[0]) + xOffset)
+        .attr("y", yOffset)
         .attr("width", xScale.bandwidth())
-        .attr("height", function(d) { return 260 - yScale(d[1]); })
+        .transition().ease(d3.easeLinear).duration((d) => 10*d[1])
+        .attr("y", (d) => yScale(d[1]) + yOffset - yHeight)
+        .attr("height", (d) => yHeight - yScale(d[1]));
     
     document.querySelectorAll(".bar").forEach((bar) => bar.style.fill = colors[processedPokemon.types[0]])    
-    // debugger
 }
 
-export const d3example = (pokemon) => {
-    // const svg = d3.select("#example"),
-    //     margin = 200,
-    //     width = svg.attr("width") - margin,
-    //     height = svg.attr("height") - margin;
-
-    // const xScale = d3.scaleBand().range([0, width]).padding(0.4),
-    //     yScale = d3.scaleLinear().range([height, 0]);
-
-    // const g = svg.append("g").attr("transform", "translate("+100+","+100+")");
-    // const test = d3.csvParse("dummy.csv")
-    // debugger;
-    // d3.csv("dummy.csv", function(data, error) {
-    //     if(error){
-    //         throw error;
-    //     }
-    //     debugger
-
-    //     xScale.domain([0, data.year]);
-    //     yScale.domain([0, data.value]);
-
-    //     g.append("g")
-    //         .attr("transform", "translate(0,"+height+")")
-    //         .call(d3.axisBottom(xScale));
-
-    //     g.append("g")
-    //         .call(d3.axisLeft(yScale).tickFormat(function(d){
-    //             return "$"+d;
-    //         }).ticks(10))
-    //         .append("text")
-    //         .attr("y", 6)
-    //         .attr("dy", "0.71em")
-    //         .attr("text-anchor", "end")
-    //         .text("value");
-
-    // })
-
-    // debugger
+export async function getAndRender(num){
+    num = parseInt(num)
+    const pokemon = await getPokemon(num)
+    console.log(pokemon)
+    graphPokemon(pokemon)
+    document.getElementById("title").innerText = pokemon.name
+    document.getElementById("portrait").src = pokemon.image
+    document.getElementById("portrait").style.width = "35%"
 }
 
 
+export function restoreGraph(){
+    const processedPokemon = JSON.parse(localStorage.getItem("currentPokemon"))
+    graphPokemon(processedPokemon)
+}
