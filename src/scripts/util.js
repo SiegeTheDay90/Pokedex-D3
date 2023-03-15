@@ -57,6 +57,10 @@ export function graphPokemon(processedPokemon){
     svg.selectChildren().remove();
     const width = svg.property("width").baseVal.value;
     const height = svg.property("height").baseVal.value;
+    svg.append("text").text("Base Stats")
+        .attr("color", "#000000")
+        .attr("font-size", "28px").attr("font-weight", "bold")
+        .attr("x", width/2.5).attr("y", 56)
     const xOffset = width/6;
     const yOffset = 8*height/10;
     const yHeight = 0.7*height
@@ -66,9 +70,11 @@ export function graphPokemon(processedPokemon){
     // const title = svg.append("text").attr("transform", "translate(40, 0)").text(processedPokemon.name);
     xScale.domain(["HP", "Atk", "Sp. Atk", "Def", "Sp. Def", "Spd"]);
     yScale.domain([260, 0]);
-    g.append("g").call(d3.axisBottom(xScale)).attr("transform", "translate("+xOffset+","+yOffset+")");
+    g.append("g").call(d3.axisBottom(xScale)).attr("font-size", "14px").attr("transform", "translate("+xOffset+","+yOffset+")")
+        
+    
     g.append("g").call(d3.axisLeft(yScale)).attr("transform", "translate("+xOffset+","+(yOffset-yHeight)+")");
-    g.append("text").attr("transform", "translate("+width/3+","+height/25+")");
+    
     // debugger
     g.selectAll(".bar")
         .data(stats)
