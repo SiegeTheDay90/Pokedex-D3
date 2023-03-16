@@ -23,6 +23,8 @@ colors["dark"] = "#705746";
 colors["steel"] = "#B7B7CE";
 colors["fairy"] = "#D685AD";
 
+
+
 export async function getPokemon(id){
     const pokemon = await _.getPokemonByName(id)
     console.log(pokemon)
@@ -50,10 +52,11 @@ export function graphPokemon(processedPokemon){
     const stats = Object.entries(processedPokemon.stats);
     stats[0][0] = "HP";
     stats[1][0] = "Atk";
-    stats[2][0] = "Sp. Atk";
-    stats[3][0] = "Def";
+    stats[2][0] = "Def";
+    stats[3][0] = "Sp. Atk";
     stats[4][0] = "Sp. Def";
     stats[5][0] = "Spd";
+    console.log(stats)
     const svg = d3.select("svg");
     svg.selectChildren().remove();
     const width = svg.property("width").baseVal.value;
