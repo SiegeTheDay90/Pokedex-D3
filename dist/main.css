@@ -56,6 +56,10 @@
   }
 }
 
+img.loading {
+  content: url("/src/assets/loading.gif");
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -90,7 +94,7 @@ body {
   }
   #main-content svg {
     position: relative;
-    width: 85vw;
+    width: 92vw;
     height: 340px;
   }
 }

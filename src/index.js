@@ -6,6 +6,10 @@ window.addEventListener("DOMContentLoaded", async () =>{
     await getAndRender(321);
     const form = document.getElementById("numberForm")
     const num = document.getElementById("number")
+    const portrait = document.getElementById("portrait")
+    portrait.addEventListener('load', (e) => {
+        e.target.classList.remove("loading")
+    })
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         console.log(num.value)
