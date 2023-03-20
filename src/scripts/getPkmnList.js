@@ -1,21 +1,16 @@
-// import Pokedex from 'pokedex-promise-v2';
+import Pokedex from 'pokedex-promise-v2';
 
 
 async function getList(){
-    const Pokedex = await import('pokedex-promise-v2');
-    // const _ = new Pokedex();
-    // const list = await _.getPokemonsList();
+    const _ = new Pokedex();
 
-    // const fs = require('fs')
+    const list = await _.getPokemonsList()
 
-    // const processedList = Object.entries(list).map((el) => el[1])
+    const processedList = list.results.map((el) => el.name)
 
-    // fs.writeFile('pokeList.txt', processedList, err => {
-    // if (err) {
-    //     console.error(err)
-    //     return
-    // }
-    // })
+    console.log(processedList)
+    debugger
+
 }
 
-getList();
+export default getList

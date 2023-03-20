@@ -14,9 +14,9 @@
         width: 100px;
     }
     #submit {
-        height: 3.2vh;
-        width: 3.2vh;
-        font-size: 1.4vh;
+        height: 30px;
+        width: 30px;
+        font-size: 12px;
         padding: 0;
         border: none;
         border-radius: 20px;
@@ -27,7 +27,6 @@
         transition: 0.2s;
         &:hover{
             background-color: $light-blue;
-            // color: $dark-yellow;
         }
     }
 }

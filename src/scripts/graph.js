@@ -1,5 +1,6 @@
 import * as d3 from 'd3';
 import Pokedex from 'pokedex-promise-v2';
+import noPokemon from '../assets/noPokemon';
 
 const _ = new Pokedex();
 
@@ -26,11 +27,15 @@ colors["fairy"] = "#D685AD";
 
 
 export async function getPokemon(identifier){
-    const pokemon = await _.getPokemonByName(identifier)
+    const pokemon = await _.getPokemonByName(identifier).catch((err) => noPokemon())
     return processPokemon(pokemon)
 }
 
 export function processPokemon(pokemon){
+
+    if(pokemon.name === "Not Found"){
+        return pokemon
+    }
     const processedPokemon = {}
     const stats = {}
     
