@@ -1,2 +1,4 @@
 node_modules/
 .DS_Store
+/scripts/ArrayInclusion.js
+/scripts/getPkmnList.js

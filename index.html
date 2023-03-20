@@ -22,10 +22,17 @@
 
   <body>
     <section id="main-header">
-      <form id="numberForm">
-        <input id="number" type="number" min="1" max="1010" maxlength="3" value="150"/>
-        <input type="submit"/>
-      </form>
+      <div id="pokemon-form">
+        <form>
+          <input id="submit" type="button" value="GO!"/>
+          <select id="search-by">
+            <option value="name" selected>Name</option>
+            <option value="id">Nat'l Dex #</option>
+          </select>
+          <input id="number" type="number" min="1" max="1010" maxlength="3" value="150" class="hidden"/>
+          <input id="name" type="text" value="Mewtwo"/>
+        </form>
+      </div>
     </section>
     <section id="main-content">
       <svg id="example"></svg>

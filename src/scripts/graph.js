@@ -25,9 +25,8 @@ colors["fairy"] = "#D685AD";
 
 
 
-export async function getPokemon(id){
-    const pokemon = await _.getPokemonByName(id)
-    console.log(pokemon)
+export async function getPokemon(identifier){
+    const pokemon = await _.getPokemonByName(identifier)
     return processPokemon(pokemon)
 }
 
@@ -40,6 +39,7 @@ export function processPokemon(pokemon){
     })
     
     processedPokemon["stats"] = stats
+    processedPokemon["id"] = pokemon.id
     processedPokemon["name"] = pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
     processedPokemon["types"] = pokemon.types.map((type) => type.type.name)
     processedPokemon["image"] = pokemon.sprites.other["official-artwork"].front_default || "./src/assets/default.png"
@@ -56,7 +56,6 @@ export function graphPokemon(processedPokemon){
     stats[3][0] = "Sp. Atk";
     stats[4][0] = "Sp. Def";
     stats[5][0] = "Spd";
-    console.log(stats)
     const svg = d3.select("svg");
     svg.selectChildren().remove();
     const width = svg.property("width").baseVal.value;
@@ -70,16 +69,15 @@ export function graphPokemon(processedPokemon){
     const scaledHeight = 0.7*height
     const xScale = d3.scaleBand().range([0, 0.9*width]).padding(0.15);
     const yScale = d3.scaleLinear().range([0, scaledHeight]);
+    
     const g = svg.append("g");
-    // const title = svg.append("text").attr("transform", "translate(40, 0)").text(processedPokemon.name);
     xScale.domain(["HP", "Atk", "Def", "Sp. Atk", "Sp. Def", "Spd"]);
     yScale.domain([260, 0]);
+    
     g.append("g").call(d3.axisBottom(xScale)).attr("font-size", "14px").attr("transform", "translate("+xOffset+","+yOffset+")")
-        
     
     g.append("g").call(d3.axisLeft(yScale)).attr("transform", "translate("+xOffset+","+(yOffset-scaledHeight)+")");
     
-    // debugger
     g.selectAll(".bar")
         .data(stats)
         .enter().append("rect")
@@ -94,10 +92,8 @@ export function graphPokemon(processedPokemon){
     document.querySelectorAll(".bar").forEach((bar) => bar.style.fill = colors[processedPokemon.types[0]])    
 }
 
-export async function getAndRender(num){
-    num = parseInt(num);
-    const pokemon = await getPokemon(num);
-    console.log(pokemon);
+export async function getAndRender(identifier){
+    const pokemon = await getPokemon(identifier.toLowerCase().trim());
     graphPokemon(pokemon);
     document.getElementById("title").innerText = pokemon.name;
     const portait = document.getElementById("portrait");
@@ -109,6 +105,10 @@ export async function getAndRender(num){
 
 
 export function restoreGraph(){
-    const processedPokemon = JSON.parse(localStorage.getItem("currentPokemon"))
+    if(localStorage.getItem("currentPokemon")){
+        var processedPokemon = JSON.parse(localStorage.getItem("currentPokemon"))
+    }else{
+        var processedPokemon = getPokemon(150);
+    }
     graphPokemon(processedPokemon)
 }

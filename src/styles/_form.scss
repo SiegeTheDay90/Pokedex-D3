@@ -1,0 +1,33 @@
+@import './variables/colors.scss';
+
+.hidden {
+    display: none
+}
+
+#pokemon-form{
+    display: flex;
+    width: 250px;
+    *{
+        height: 3vh;
+    }
+    #name {
+        width: 100px;
+    }
+    #submit {
+        height: 3.2vh;
+        width: 3.2vh;
+        font-size: 1.4vh;
+        padding: 0;
+        border: none;
+        border-radius: 20px;
+        background-color: $blue;
+        color: $yellow;
+        font-weight: bolder;
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover{
+            background-color: $light-blue;
+            // color: $dark-yellow;
+        }
+    }
+}

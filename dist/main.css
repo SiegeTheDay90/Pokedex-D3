@@ -60,6 +60,37 @@ img.loading {
   content: url("/src/assets/loading.gif");
 }
 
+.hidden {
+  display: none;
+}
+
+#pokemon-form {
+  display: flex;
+  width: 250px;
+}
+#pokemon-form * {
+  height: 3vh;
+}
+#pokemon-form #name {
+  width: 100px;
+}
+#pokemon-form #submit {
+  height: 3.2vh;
+  width: 3.2vh;
+  font-size: 1.4vh;
+  padding: 0;
+  border: none;
+  border-radius: 20px;
+  background-color: #344e8f;
+  color: #FFCB05;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#pokemon-form #submit:hover {
+  background-color: #4666b7;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -81,7 +112,8 @@ body {
 }
 
 #main-header {
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 #number {
