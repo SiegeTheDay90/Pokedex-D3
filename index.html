@@ -12,6 +12,7 @@
     <nav id="header-nav">
       <img id="Logo" alt="Pokédex D3 Logo" src="./src/assets/logo.png" />
       <img id="Logo" alt="Pokédex D3 Logo" src="./src/assets/noPokemon1.png" hidden/>
+      <img id="Logo" alt="Pokédex D3 Logo" src="./src/assets/loading.gif" hidden/>
       <img id="Logo" alt="Pokédex D3 Logo" src="./src/assets/noPokemon2.png" hidden/>
       <img id="Logo" alt="Pokédex D3 Logo" src="./src/assets/noPokemon3.png" hidden/>
       <h1 id="title"></h1>
@@ -25,17 +26,19 @@
 
   <body>
     <section id="main-header">
-      <div id="pokemon-form">
-        <form>
+        <form id="pokemon-form">
           <input id="submit" type="button" value="GO!"/>
           <select id="search-by">
             <option value="name" selected>Name</option>
             <option value="id">Nat'l Dex #</option>
           </select>
           <input id="number" type="number" min="1" max="1010" maxlength="3" value="150" class="hidden"/>
-          <input id="name" type="text" value="Mewtwo"/>
+          <div id="name-container">
+            <input id="name" type="text" value="Mewtwo"/>
+            <ul id="auto-complete-name">
+            </ul>
+          </div>
         </form>
-      </div>
     </section>
     <section id="main-content">
       <svg id="example"></svg>

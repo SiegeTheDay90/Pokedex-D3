@@ -1,3 +1,165 @@
-#header-nav{display:flex;padding:10px 10px 2px 10px;justify-content:space-between;border-bottom:4px solid #344e8f;margin-bottom:1%}#header-nav #contact-list{font-size:2.8em;text-decoration:none;text-align:center}#header-nav #contact-list a{color:#3c5aa6;transition:.4s}#header-nav #contact-list a:hover{color:#deb203}#header-nav #contact-list p{font-size:14px;margin-top:-5px}#header-nav #title{font-size:4em;margin:0}#header-nav #logo{max-height:100px}@media(max-width: 700px){#header-nav #contact-list{font-size:1.8em;text-decoration:none;text-align:center}#header-nav #contact-list a{color:#3c5aa6;transition:.4s}#header-nav #contact-list a:hover{color:#deb203}#header-nav #contact-list p{font-size:11px;margin-top:-5px}#header-nav #title{font-size:2em}#header-nav #logo{max-height:50px}}img.loading{content:url("/src/assets/loading.gif")}.hidden{display:none}#pokemon-form{display:flex;width:250px}#pokemon-form *{height:3vh}#pokemon-form #name{width:100px}#pokemon-form #submit{height:30px;width:30px;font-size:12px;padding:0;border:none;border-radius:20px;background-color:#344e8f;color:#ffcb05;font-weight:bolder;cursor:pointer;transition:.2s}#pokemon-form #submit:hover{background-color:#4666b7}body{margin:0;padding:0;border:8px solid #344e8f}#main-content{display:flex;align-items:center;justify-content:space-evenly}#main-content svg{width:40vw;height:40vw}#footer-content,#main-content{padding-left:2%}#main-header{display:flex;justify-content:center}#number{width:50px}@media(max-width: 700px){#main-content{flex-wrap:wrap-reverse}#main-content svg{position:relative;width:92vw;height:340px}}
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[1].use[1]!./node_modules/sass-loader/dist/cjs.js!./src/index.scss ***!
+  \*************************************************************************************************************************************/
+#header-nav {
+  display: flex;
+  padding: 10px 10px 2px 10px;
+  justify-content: space-between;
+  border-bottom: 4px solid #344e8f;
+  margin-bottom: 1%;
+}
+#header-nav #contact-list {
+  font-size: 2.8em;
+  text-decoration: none;
+  text-align: center;
+}
+#header-nav #contact-list a {
+  color: #3c5aa6;
+  transition: 0.4s;
+}
+#header-nav #contact-list a:hover {
+  color: #deb203;
+}
+#header-nav #contact-list p {
+  font-size: 14px;
+  margin-top: -5px;
+}
+#header-nav #title {
+  font-size: 4em;
+  margin: 0;
+}
+#header-nav #logo {
+  max-height: 100px;
+}
+@media (max-width: 700px) {
+  #header-nav #contact-list {
+    font-size: 1.8em;
+    text-decoration: none;
+    text-align: center;
+  }
+  #header-nav #contact-list a {
+    color: #3c5aa6;
+    transition: 0.4s;
+  }
+  #header-nav #contact-list a:hover {
+    color: #deb203;
+  }
+  #header-nav #contact-list p {
+    font-size: 11px;
+    margin-top: -5px;
+  }
+  #header-nav #title {
+    font-size: 2em;
+  }
+  #header-nav #logo {
+    max-height: 50px;
+  }
+}
 
-/*# sourceMappingURL=main.css.map*/
+img.loading {
+  content: url("/src/assets/loading.gif");
+}
+
+.hidden {
+  display: none;
+}
+
+#pokemon-form {
+  display: flex;
+  width: fit-content;
+}
+#pokemon-form * {
+  height: 3vh;
+}
+#pokemon-form #name-container {
+  width: 100px;
+  position: relative;
+  margin: 0;
+}
+#pokemon-form #name {
+  width: 100px;
+}
+#pokemon-form #search-by {
+  margin-right: 8px;
+}
+#pokemon-form #submit {
+  height: 30px;
+  width: 30px;
+  font-size: 12px;
+  margin-right: 6px;
+  padding: 0;
+  border: none;
+  border-radius: 20px;
+  background-color: #344e8f;
+  color: #FFCB05;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: 0.2s;
+}
+#pokemon-form #submit:hover {
+  background-color: #4666b7;
+}
+
+#auto-complete-name {
+  padding: 0;
+  margin: 0;
+  padding-top: 4px;
+  border: none;
+  display: none;
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: fit-content;
+  background-color: #dae5ff;
+  box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.1);
+}
+#auto-complete-name li:hover {
+  background: #acc3ff;
+}
+#auto-complete-name li {
+  background-color: #dae5ff;
+  cursor: pointer;
+  padding-left: 5px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 8px solid #344e8f;
+}
+
+#main-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+#main-content svg {
+  width: 40vw;
+  height: 40vw;
+}
+
+#footer-content, #main-content {
+  padding-left: 2%;
+}
+
+#main-header {
+  display: flex;
+  justify-content: center;
+}
+
+#number {
+  width: 50px;
+}
+
+@media (max-width: 700px) {
+  #main-content {
+    flex-wrap: wrap-reverse;
+  }
+  #main-content svg {
+    position: relative;
+    width: 92vw;
+    height: 340px;
+  }
+}
